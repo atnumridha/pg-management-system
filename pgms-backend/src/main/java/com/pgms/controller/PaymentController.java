@@ -34,4 +34,15 @@ public class PaymentController {
     public Payment create(@RequestBody Payment payment) {
         return paymentService.create(payment);
     }
+
+    @PutMapping("/{id}")
+    public Payment update(@PathVariable Long id, @RequestBody Payment payment) {
+        payment.setId(id);
+        return paymentService.update(payment);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        paymentService.delete(id);
+    }
 }

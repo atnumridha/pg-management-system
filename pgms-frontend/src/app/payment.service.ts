@@ -32,4 +32,12 @@ export class PaymentService {
   create(payment: Payment): Observable<Payment> {
     return this.http.post<Payment>(this.baseUrl, payment);
   }
+
+  update(id: number, payment: Payment): Observable<Payment> {
+    return this.http.put<Payment>(`${this.baseUrl}/${id}`, payment);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
 }

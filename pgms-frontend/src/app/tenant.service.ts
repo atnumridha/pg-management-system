@@ -27,3 +27,5 @@ export class TenantService {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
   }
 }
+
+export { Tenant } from './tenant';

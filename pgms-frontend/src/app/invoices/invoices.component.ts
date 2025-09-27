@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { InvoiceService, Invoice } from '../invoice.service';
+import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
 
 @Component({
   selector: 'app-invoices',
   template: `
   <div class="container my-4">
-    <h2>Invoices</h2>
+    <div class="d-flex justify-content-between align-items-center">
+      <h2>Invoices</h2>
+      <button class="btn btn-primary" (click)="openAddInvoice()">Add Invoice</button>
+    </div>
     <hr>
     <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
     <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
@@ -18,6 +23,7 @@ import { InvoiceService, Invoice } from '../invoice.service';
           <th>Due Date</th>
           <th>Total</th>
           <th>Status</th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +40,10 @@ import { InvoiceService, Invoice } from '../invoice.service';
               {{ inv.status }}
             </span>
           </td>
+          <td>
+            <button class="btn btn-sm btn-secondary me-2" (click)="openEditInvoice(inv)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteInvoice(inv)">Delete</button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -49,9 +59,24 @@ export class InvoicesComponent implements OnInit {
   loading = true;
   error = '';
 
-  constructor(private invoiceService: InvoiceService) {}
+  constructor(private invoiceService: InvoiceService, private dialog: MatDialog) {}
+
+  deleteInvoice(inv: Invoice) {
+    if (!inv.id) return;
+    if (confirm('Are you sure you want to delete this invoice?')) {
+      this.invoiceService.deleteInvoice(inv.id).subscribe({
+        next: () => this.loadInvoices(),
+        error: err => this.error = 'Failed to delete invoice'
+      });
+    }
+  }
 
   ngOnInit() {
+    this.loadInvoices();
+  }
+
+  loadInvoices() {
+    this.loading = true;
     this.invoiceService.getAll().subscribe({
       next: (invs) => {
         this.invoices = invs;
@@ -60,6 +85,27 @@ export class InvoicesComponent implements OnInit {
       error: err => {
         this.error = 'Could not load invoices';
         this.loading = false;
+      }
+    });
+  }
+
+  openAddInvoice() {
+    const dialogRef = this.dialog.open(AddInvoiceComponent, { width: '650px' });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'added' || result === 'updated') {
+        this.loadInvoices();
+      }
+    });
+  }
+
+  openEditInvoice(invoice: Invoice) {
+    const dialogRef = this.dialog.open(AddInvoiceComponent, {
+      width: '650px',
+      data: { invoice, edit: true }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'updated') {
+        this.loadInvoices();
       }
     });
   }

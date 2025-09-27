@@ -46,7 +46,12 @@ public class InvoiceService {
         return invoiceRepository.save(invoice);
     }
 
-    private String generateInvoiceNo(int year, int month) {
+
+    public void deleteById(Long id) {
+        invoiceRepository.deleteById(id);
+    }
+
+    public String generateInvoiceNo(int year, int month) {
         // Simple: INV-YYYYMM-HHMMSS
         String yymm = String.format("%04d%02d", year, month);
         return "INV-" + yymm + "-" + System.currentTimeMillis() % 100000;
@@ -73,5 +78,10 @@ public class InvoiceService {
             inv.setStatus(status);
             invoiceRepository.save(inv);
         });
+    }
+
+    // Add this for direct invoice creation from API
+    public Invoice save(Invoice invoice) {
+        return invoiceRepository.save(invoice);
     }
 }

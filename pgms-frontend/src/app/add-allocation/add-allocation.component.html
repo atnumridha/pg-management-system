@@ -1,0 +1,64 @@
+<div class="card p-4 mb-4" style="max-width: 520px; margin:auto;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Add Allocation</h3>
+    <button type="button" (click)="cancelAllocation()" class="btn-close" aria-label="Close"
+      style="font-size:1.3rem;"></button>
+  </div>
+  <form #f="ngForm" (ngSubmit)="f.form.valid && addAllocation()" class="row g-3 form-container" autocomplete="off">
+    <div class="form-group col-md-6">
+      <label><b>Tenant</b></label>
+      <select class="form-select" [(ngModel)]="allocation.tenantId" name="tenantId" required #tenantId="ngModel" [ngClass]="{ 'is-invalid': f.submitted && tenantId.errors }">
+        <option [ngValue]="0" disabled selected>Select Tenant</option>
+        <option *ngFor="let t of tenants" [ngValue]="t.id">{{t.firstName}} {{t.lastName}}</option>
+      </select>
+      <div *ngIf="f.submitted && tenantId.errors" class="invalid-feedback">Tenant selection required</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Room</b></label>
+      <select class="form-select" [(ngModel)]="allocation.roomId" name="roomId" required #roomId="ngModel" [ngClass]="{ 'is-invalid': f.submitted && roomId.errors }">
+        <option [ngValue]="0" disabled selected>Select Room</option>
+        <option *ngFor="let r of rooms" [ngValue]="r.id">{{ r.number }}</option>
+      </select>
+      <div *ngIf="f.submitted && roomId.errors" class="invalid-feedback">Room selection required</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Start Date</b></label>
+      <input type="date" class="form-control" [(ngModel)]="allocation.startDate" name="startDate" required #startDate="ngModel" [ngClass]="{ 'is-invalid': f.submitted && startDate.errors }" />
+      <div *ngIf="f.submitted && startDate.errors" class="invalid-feedback">Start date required</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>End Date</b> <span class="text-muted">(optional)</span></label>
+      <input type="date" class="form-control" [(ngModel)]="allocation.endDate" name="endDate" />
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Monthly Rent</b></label>
+      <input type="number" class="form-control" [(ngModel)]="allocation.monthlyRent" name="monthlyRent" required #monthlyRent="ngModel" [ngClass]="{ 'is-invalid': f.submitted && monthlyRent.errors }" />
+      <div *ngIf="f.submitted && monthlyRent.errors" class="invalid-feedback">Monthly rent required</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Deposit</b> <span class="text-muted">(optional)</span></label>
+      <input type="number" class="form-control" [(ngModel)]="allocation.deposit" name="deposit" />
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Billing Day of Month</b></label>
+      <input type="number" class="form-control" [(ngModel)]="allocation.billingDayOfMonth" name="billingDayOfMonth" required min="1" max="28" #billingDayOfMonth="ngModel" [ngClass]="{ 'is-invalid': f.submitted && billingDayOfMonth.errors }" />
+      <div *ngIf="f.submitted && billingDayOfMonth.errors" class="invalid-feedback">Day 1–28 required</div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Status</b></label>
+      <select class="form-select" [(ngModel)]="allocation.status" name="status" required #status="ngModel" [ngClass]="{ 'is-invalid': f.submitted && status.errors }">
+        <option value="ACTIVE">Active</option>
+        <option value="INACTIVE">Inactive</option>
+        <option value="ENDED">Ended</option>
+      </select>
+    </div>
+    <div class="form-group col-md-12">
+      <label><b>Notes</b> <span class="text-muted">(optional)</span></label>
+      <textarea class="form-control" [(ngModel)]="allocation.notes" name="notes"></textarea>
+    </div>
+    <div class="form-group col-md-12 d-flex justify-content-center gap-2">
+      <button class="btn btn-success" type="submit">Add Allocation</button>
+      <button type="button" (click)="cancelAllocation()" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -53,4 +53,31 @@ public class InvoiceController {
     public void updateStatus(@PathVariable Long id, @RequestParam String status) {
         invoiceService.updateStatus(id, status);
     }
+
+    // Create a single invoice
+    @PostMapping
+    public Invoice createInvoice(@RequestBody Invoice invoice) {
+        return invoiceService.save(invoice);
+    }
+
+    // Update an invoice
+    @PutMapping("/{id}")
+    public Invoice updateInvoice(@PathVariable Long id, @RequestBody Invoice invoice) {
+        invoice.setId(id);
+        return invoiceService.save(invoice);
+    }
+
+    // Generate and return a new invoice number for given year and month
+    @GetMapping("/generate-number")
+    public String generateInvoiceNumber(
+        @RequestParam int year,
+        @RequestParam int month
+    ) {
+        return invoiceService.generateInvoiceNo(year, month);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteInvoice(@PathVariable Long id) {
+        invoiceService.deleteById(id);
+    }
 }

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { HttpClientModule } from '@angular/common/http'
+import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -11,7 +12,6 @@ import { UpdateTenantComponent } from './update-tenant/update-tenant.component';
 import { TenantDetailsComponent } from './tenant-details/tenant-details.component';
 import { FormsModule } from '@angular/forms';
 
-import { HomeComponent } from './home/home.component';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -22,7 +22,11 @@ import { PaymentsComponent } from './payments/payments.component';
 import { AllocationsComponent } from './allocations/allocations.component';
 
 import { AddPropertyComponent } from './add-property/add-property.component';
+import { AddInvoiceComponent } from './add-invoice/add-invoice.component';
+import { AddPaymentComponent } from './add-payment/add-payment.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AddAllocationComponent } from './add-allocation/add-allocation.component';
 
 @NgModule({
   declarations: [
@@ -37,17 +41,21 @@ import { MatDialogModule } from '@angular/material/dialog';
     InvoicesComponent,
     PaymentsComponent,
     AllocationsComponent,
-    AddPropertyComponent
+    AddPropertyComponent,
+    AddInvoiceComponent,
+    AddPaymentComponent,
+    AddAllocationComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    FormsModule,
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
-    FormsModule,
     BrowserAnimationsModule,
-    HomeComponent,
-    MatDialogModule
+    MatDialogModule,
+    NgxChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

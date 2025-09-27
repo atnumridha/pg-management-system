@@ -51,4 +51,20 @@ export class InvoiceService {
   updateStatus(id: number, status: string): Observable<void> {
     return this.http.patch<void>(`${this.baseUrl}/${id}/status?status=${status}`, {});
   }
+
+  createInvoice(invoice: Invoice): Observable<Invoice> {
+    return this.http.post<Invoice>(this.baseUrl, invoice);
+  }
+
+  updateInvoice(id: number, invoice: Invoice): Observable<Invoice> {
+    return this.http.put<Invoice>(`${this.baseUrl}/${id}`, invoice);
+  }
+
+  deleteInvoice(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  getNextInvoiceNumber(year: number, month: number): Observable<string> {
+    return this.http.get(`${this.baseUrl}/generate-number?year=${year}&month=${month}`, { responseType: 'text' });
+  }
 }

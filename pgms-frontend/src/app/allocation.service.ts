@@ -42,4 +42,12 @@ export class AllocationService {
   endAllocation(id: number): Observable<void> {
     return this.http.patch<void>(`${this.baseUrl}/${id}/end`, {});
   }
+
+  update(id: number, allocation: Allocation): Observable<Allocation> {
+    return this.http.put<Allocation>(`${this.baseUrl}/${id}`, allocation);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
 }
