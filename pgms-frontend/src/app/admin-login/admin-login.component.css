@@ -1,4 +1,27 @@
-.divider:after,
+.divider:after,.login-input {
+  background: #f4f4f5;
+  border: 1.5px solid #e0e0e0;
+  color: #34495e;
+  font-size: 1.09rem;
+  line-height: 1.17;
+  transition: border 0.21s, box-shadow 0.23s;
+  box-shadow: 0 1.5px 7px 0 rgba(50,50,50,.06);
+  border-radius: 9px;
+}
+.login-input:focus {
+  border: 1.5px solid #1976d2;
+  outline: none;
+  background: #fff;
+  color: #222;
+  box-shadow: 0 0 0 1.2px #2196f3, 0 1.5px 13px 0 rgba(44,62,80,.09);
+}
+
+.login-brand {
+  font-family: 'Montserrat', 'Roboto Slab', ui-serif, Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.022em;
+  color: #17212b;
+}
 .divider:before {
 content: "";
 flex: 1;

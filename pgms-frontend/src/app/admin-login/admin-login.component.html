@@ -1,41 +1,48 @@
 <section class="vh-100">
   <div class="container-fluid h-custom">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-9 col-lg-6 col-xl-5">
-        <img src="../assets/noBgLogin.png"
-          class="img-fluid" alt="Sample image">
+      <div class="col-md-9 col-lg-6 col-xl-5 d-none d-md-block">
+        <img src="../assets/noBgLogin.png" class="img-fluid" alt="Sample image"
+          style="max-width:94%;border-radius:22px;">
       </div>
       <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
-        <form (ngSubmit)="login()">
-          <div class="divider d-flex align-items-center my-4">
-            <p class="text-center fw-bold mx-3 mb-0">Login</p>
-          </div>
+        <div class="login-card material-elevated bg-white"
+          style="border-radius:13px;box-shadow:0 6px 28px 0 rgba(44,62,80,.13);padding:1.15rem 1.5rem 1.03rem;">
+          <form (ngSubmit)="login()">
+            <div class="mb-3 mt-2 text-center">
+              <div class="login-brand" style="font-size:1.11rem;margin-bottom:0.45rem;letter-spacing:.01em;">Paying
+                Guest Management System</div>
+            </div>
 
-          <div *ngIf="errorMessage" class="alert alert-danger">
-            {{ errorMessage }}
-          </div>
+            <div *ngIf="errorMessage" class="alert alert-danger py-1 px-2 mb-2" style="font-size:.99em;">
+              {{ errorMessage }}
+            </div>
 
-          <!-- Username input -->
-          <div class="form-outline mb-4">
-            <input type="text" id="adminName" class="form-control form-control-lg"
-              placeholder="Enter admin username" [(ngModel)]="username" name="username" required autocomplete="username"/>
-            <label class="form-label" for="adminName">&nbsp;Username</label>
-          </div>
+            <!-- Username input -->
+            <div class="mb-2">
+              <label for="adminName" class="form-label mb-0"
+                style="font-weight:500;letter-spacing:.01em;">Username</label>
+              <input type="text" id="adminName" class="form-control login-input mb-1" placeholder="Enter username"
+                [(ngModel)]="username" name="username" required autocomplete="username" />
+            </div>
 
-          <!-- Password input -->
-          <div class="form-outline mb-3">
-            <input type="password" id="adminPassword" class="form-control form-control-lg"
-              placeholder="Enter password" [(ngModel)]="password" name="password" required autocomplete="current-password"/>
-            <label class="form-label" for="adminPassword">&nbsp;Password</label>
-          </div>
+            <!-- Password input -->
+            <div class="mb-2">
+              <label for="adminPassword" class="form-label mb-0"
+                style="font-weight:500;letter-spacing:.01em;">Password</label>
+              <input type="password" id="adminPassword" class="form-control login-input mb-1"
+                placeholder="Enter password" [(ngModel)]="password" name="password" required
+                autocomplete="current-password" />
+            </div>
 
-          <div class="text-center text-lg-start mt-4 pt-2">
-            <button type="submit" class="btn btn-dark btn-lg"
-              style="padding-left: 2.5rem; padding-right: 2.5rem;" [disabled]="loading">
-              {{ loading ? 'Logging in...' : 'Login' }}
-            </button>
-          </div>
-        </form>
+            <div class="text-center mt-3">
+              <button type="submit" class="btn btn-primary btn-md px-4 py-2 login-btn" [disabled]="loading"
+                style="font-size:1.13em;letter-spacing:.01em;">
+                {{ loading ? 'Logging in...' : 'Login' }}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
