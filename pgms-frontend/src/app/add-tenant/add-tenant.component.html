@@ -1,0 +1,97 @@
+<div class="card p-4 mb-4" style="max-width: 540px; margin:auto;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Add Tenant</h3>
+    <button type="button" (click)="cancel()" class="btn-close" aria-label="Close" style="font-size:1.3rem;"></button>
+  </div>
+  <form #f="ngForm" (ngSubmit)="f.form.valid && addTenant()" class="row g-3 form-container" autocomplete="off">
+    <div class="form-group col-md-6">
+      <label><b>First Name</b></label>
+      <input type="text" class="form-control" id="firstName" [(ngModel)]="tenant.firstName" name="firstName" required
+        minlength="3" #firstName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && firstName.errors }" />
+      <div *ngIf="f.submitted && firstName.errors" class="invalid-feedback">
+        <div *ngIf="firstName.errors['required']">First name is required</div>
+        <div *ngIf="firstName.errors['minlength']">First Name minimum 3 characters</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Last Name</b></label>
+      <input type="text" class="form-control" id="lastName" [(ngModel)]="tenant.lastName" name="lastName" required
+        #lastName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && lastName.errors }">
+      <div *ngIf="f.submitted && lastName.errors" class="invalid-feedback">
+        <div *ngIf="lastName.errors['required']">Last name is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Phone</b></label>
+      <input type="tel" class="form-control" id="phone" [(ngModel)]="tenant.phone" name="phone" required
+        pattern="^[0-9]{10}$" #phone="ngModel" [ngClass]="{ 'is-invalid': f.submitted && phone.errors }" />
+      <div *ngIf="f.submitted && phone.errors" class="invalid-feedback">
+        <div *ngIf="phone.errors['required']">Phone number is required</div>
+        <div *ngIf="phone.errors['pattern']">Enter a valid 10-digit phone number</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Email</b></label>
+      <input type="email" class="form-control" id="email" [(ngModel)]="tenant.email" name="email" required email
+        #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" />
+      <div *ngIf="f.submitted && email.errors" class="invalid-feedback">
+        <div *ngIf="email.errors['required']">Email is required</div>
+        <div *ngIf="email.invalid">Invalid email format</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>KYC Type</b></label>
+      <select class="form-select" id="kycType" [(ngModel)]="tenant.kycType" name="kycType" required #kycType="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && kycType.errors }">
+        <option disabled value="">Choose...</option>
+        <option>AADHAR</option>
+        <option>PASSPORT</option>
+        <option>PAN</option>
+        <option>DRIVING_LICENSE</option>
+      </select>
+      <div *ngIf="f.submitted && kycType.errors" class="invalid-feedback">
+        <div *ngIf="kycType.errors['required']">KYC Type is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>KYC ID</b></label>
+      <input type="text" class="form-control" id="kycId" [(ngModel)]="tenant.kycId" name="kycId" required
+        #kycId="ngModel" [ngClass]="{ 'is-invalid': f.submitted && kycId.errors }" />
+      <div *ngIf="f.submitted && kycId.errors" class="invalid-feedback">
+        <div *ngIf="kycId.errors['required']">KYC ID is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-12">
+      <label><b>Address</b></label>
+      <textarea class="form-control" id="address" [(ngModel)]="tenant.address" name="address" required
+        #address="ngModel" [ngClass]="{ 'is-invalid': f.submitted && address.errors }"></textarea>
+      <div *ngIf="f.submitted && address.errors" class="invalid-feedback">
+        <div *ngIf="address.errors['required']">Address is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Emergency Contact</b></label>
+      <input type="text" class="form-control" id="emergencyContact" [(ngModel)]="tenant.emergencyContact"
+        name="emergencyContact" required #emergencyContact="ngModel"
+        [ngClass]="{ 'is-invalid': f.submitted && emergencyContact.errors }" />
+      <div *ngIf="f.submitted && emergencyContact.errors" class="invalid-feedback">
+        <div *ngIf="emergencyContact.errors['required']">Emergency Contact is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Joined At</b></label>
+      <input type="date" class="form-control" id="joinedAt" [(ngModel)]="tenant.joinedAt" name="joinedAt" required
+        #joinedAt="ngModel" [ngClass]="{ 'is-invalid': f.submitted && joinedAt.errors }">
+      <div *ngIf="f.submitted && joinedAt.errors" class="invalid-feedback">
+        <div *ngIf="joinedAt.errors['required']">Joining Date is required</div>
+      </div>
+    </div>
+    <input type="hidden" [(ngModel)]="tenant.status" name="status" value="ACTIVE">
+    <div class="form-group col-md-6 d-flex align-items-end">
+      <button class="btn btn-success full-width-button" type="submit" id="reg">Add Tenant</button>
+    </div>
+    <div class="form-group col-md-6 d-flex align-items-end">
+      <button type="button" (click)="cancel()" class="btn btn-secondary full-width-button">Cancel</button>
+    </div>
+  </form>
+</div>

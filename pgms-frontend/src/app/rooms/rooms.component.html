@@ -1,0 +1,120 @@
+<div class="container my-4">
+  <h2>Rooms Management</h2>
+  <hr>
+  <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div class="row mb-2">
+    <div class="col-8 mb-2">
+      <input class="form-control" [(ngModel)]="searchTerm" placeholder="Search rooms...">
+    </div>
+    <div class="col-4 mb-2 text-end">
+      <button class="btn btn-primary" (click)="showAddForm = !showAddForm">{{ showAddForm ? 'Cancel' : '+ Add Room' }}</button>
+    </div>
+  </div>
+  <form *ngIf="showAddForm" (ngSubmit)="addRoom()" class="mb-3 card card-body">
+    <div class="row mb-2">
+      <div class="col">
+        <input class="form-control" [(ngModel)]="addModel.number" name="number" placeholder="Room Number" required>
+      </div>
+      <div class="col">
+        <input class="form-control" [(ngModel)]="addModel.type" name="type" placeholder="Type (Single, Double...)" required>
+      </div>
+      <div class="col">
+        <input type="number" class="form-control" [(ngModel)]="addModel.capacity" name="capacity" min="1" placeholder="Capacity" required>
+      </div>
+      <div class="col">
+        <input type="number" class="form-control" [(ngModel)]="addModel.rentBase" name="rentBase" min="0" placeholder="Rent (₹)" required>
+      </div>
+    </div>
+    <div class="row mb-2">
+      <div class="col-6">
+        <input class="form-control" [(ngModel)]="addModel.amenities" name="amenities" placeholder="Amenities">
+      </div>
+      <div class="col-3">
+        <select class="form-select" [(ngModel)]="addModel.status" name="status">
+          <option value="AVAILABLE">Available</option>
+          <option value="OCCUPIED">Occupied</option>
+          <option value="MAINTENANCE">Maintenance</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <select class="form-select" [(ngModel)]="addModel.propertyId" name="propertyId" required>
+          <option [ngValue]="0" disabled>Select Property</option>
+          <option *ngFor="let prop of properties" [ngValue]="prop.id">
+            {{ prop.name }} - {{ prop.address }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="text-end">
+      <button class="btn btn-success" type="submit">Save Room</button>
+      <button type="button" class="btn btn-secondary ms-2" (click)="showAddForm = false">Cancel</button>
+    </div>
+  </form>
+
+  <table class="table table-bordered" *ngIf="filteredRooms().length > 0">
+    <thead class="table-dark">
+      <tr>
+        <th>Number</th>
+        <th>Type</th>
+        <th>Capacity</th>
+        <th>Rent</th>
+        <th>Status</th>
+        <th>Amenities</th>
+        <th>Property ID</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let room of filteredRooms()">
+        <ng-container *ngIf="editId !== room.id; else editRow">
+          <td>{{ room.number }}</td>
+          <td>{{ room.type }}</td>
+          <td>{{ room.capacity == null ? '-' : room.capacity }}</td>
+          <td>{{ room.rentBase == null ? '-' : ('₹' + room.rentBase) }}</td>
+          <td>
+            <span [class]="room.status === 'AVAILABLE' ? 'badge bg-success' :
+            room.status === 'OCCUPIED' ? 'badge bg-danger' :
+            room.status === 'MAINTENANCE' ? 'badge bg-warning' : 'badge bg-secondary'"
+            >{{ room.status }}</span>
+          </td>
+          <td>{{ room.amenities || '-' }}</td>
+          <td>{{ room.propertyId }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="beginEdit(room)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.id)">Delete</button>
+          </td>
+        </ng-container>
+        <ng-template #editRow>
+          <td><input class="form-control" [(ngModel)]="editModel.number"></td>
+          <td><input class="form-control" [(ngModel)]="editModel.type"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="editModel.capacity" min="0"></td>
+          <td><input type="number" class="form-control" [(ngModel)]="editModel.rentBase" min="0"></td>
+          <td>
+            <select class="form-select" [(ngModel)]="editModel.status">
+              <option value="AVAILABLE">Available</option>
+              <option value="OCCUPIED">Occupied</option>
+              <option value="MAINTENANCE">Maintenance</option>
+            </select>
+          </td>
+          <td><input class="form-control" [(ngModel)]="editModel.amenities"></td>
+          <td>
+            <select class="form-select" [(ngModel)]="editModel.propertyId" required>
+              <option [ngValue]="0" disabled>Select Property</option>
+              <option *ngFor="let prop of properties" [ngValue]="prop.id">
+                {{ prop.name }} - {{ prop.address }}
+              </option>
+            </select>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm me-2" (click)="saveEdit()">Save</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="rooms.length === 0 && !loading && !error">
+    <div class="alert alert-info mt-3">No rooms found.</div>
+  </div>
+</div>

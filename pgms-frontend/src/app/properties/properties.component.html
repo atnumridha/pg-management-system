@@ -1,0 +1,64 @@
+<div class="container my-4">
+  <h2>Properties Management</h2>
+  <hr>
+  <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div class="row mb-2">
+    <div class="col-8 mb-2">
+      <input class="form-control" [(ngModel)]="searchTerm" placeholder="Search properties...">
+    </div>
+    <div class="col-4 mb-2 text-end">
+      <button class="btn btn-primary" (click)="openAddPropertyDialog()">+ Add Property</button>
+    </div>
+  </div>
+
+  <table class="table table-bordered" *ngIf="filteredProperties().length > 0">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>City</th>
+        <th>Owner</th>
+        <th>Active</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of filteredProperties()">
+        <ng-container *ngIf="editId !== property.id; else editRow">
+          <td>{{ property.name }}</td>
+          <td>{{ property.address }}</td>
+          <td>{{ property.city }}</td>
+          <td>{{ property.ownerName }}</td>
+          <td>
+            <span [class]="property.active ? 'badge bg-success' : 'badge bg-danger'">
+              {{ property.active ? 'Active' : 'Inactive' }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="beginEdit(property)">Edit</button>
+            <button class="btn btn-sm btn-danger" (click)="deleteProperty(property.id)">Delete</button>
+          </td>
+        </ng-container>
+        <ng-template #editRow>
+          <td><input class="form-control" [(ngModel)]="editModel.name"></td>
+          <td><input class="form-control" [(ngModel)]="editModel.address"></td>
+          <td><input class="form-control" [(ngModel)]="editModel.city"></td>
+          <td><input class="form-control" [(ngModel)]="editModel.ownerName"></td>
+          <td>
+            <label>
+              <input type="checkbox" [(ngModel)]="editModel.active"> Active
+            </label>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm me-2" (click)="saveEdit()">Save</button>
+            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+          </td>
+        </ng-template>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="properties.length === 0 && !loading && !error">
+    <div class="alert alert-info mt-3">No properties found.</div>
+  </div>
+</div>

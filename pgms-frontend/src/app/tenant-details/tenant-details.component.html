@@ -1,0 +1,70 @@
+<div class="container-sm">
+    <div class="col-md-6 offset-md-3 container-sm">
+        <div class="text-center mb-4">
+            <img src="../assets/download.jpg" class="img-thumbnail" alt="Tenant avatar" style="max-width: 120px;">
+        </div>
+        <form class="row g-3 form-container container-sm">
+            <div class="form-group col-md-6">
+                <label><b>First Name</b></label>
+                <span class="form-control-plaintext">{{tenant?.firstName}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>Last Name</b></label>
+                <span class="form-control-plaintext">{{tenant?.lastName}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>Phone</b></label>
+                <span class="form-control-plaintext">{{tenant?.phone}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>Email</b></label>
+                <span class="form-control-plaintext">{{tenant?.email}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>KYC Type</b></label>
+                <span class="form-control-plaintext">{{tenant?.kycType}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>KYC ID</b></label>
+                <span class="form-control-plaintext">{{tenant?.kycId}}</span>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label><b>Address</b></label>
+                <span class="form-control-plaintext">{{tenant?.address}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>Emergency Contact</b></label>
+                <span class="form-control-plaintext">{{tenant?.emergencyContact}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>Joined At</b></label>
+                <span class="form-control-plaintext">{{tenant?.joinedAt}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>Status</b></label>
+                <span class="form-control-plaintext">{{tenant?.status}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label><b>Id</b></label>
+                <span class="form-control-plaintext">{{tenant?.id}}</span>
+            </div>
+
+            <div class="form-group col-md-6">
+                <a [routerLink]="['/updating-tenant-by-id', tenant?.id]" id="btn1" class="btn btn-secondary full-width-button mt-3" tabindex="0">Update Details</a>
+            </div>
+            <div class="form-group col-md-6">
+                <a routerLink="/show-all-tenants" id="btn2" class="btn btn-danger full-width-button mt-3" tabindex="0">Back</a>
+            </div>
+        </form>
+    </div>
+</div>

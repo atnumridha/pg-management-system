@@ -1,0 +1,122 @@
+<div class="container mt-4">
+  <div *ngIf="loading" class="text-center my-5">
+    <div class="spinner-border"></div>
+    <div>Loading dashboard...</div>
+  </div>
+  <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
+  <div *ngIf="metrics">
+    <!-- KPI Cards row -->
+    <div class="row mb-4">
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center">
+          <div class="card-body">
+            <h6 class="card-title">Properties</h6>
+            <div class="h1">{{ metrics.totalProperties }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center">
+          <div class="card-body">
+            <h6 class="card-title">Rooms</h6>
+            <div class="h1">{{ metrics.totalRooms }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center">
+          <div class="card-body">
+            <h6 class="card-title">Tenants</h6>
+            <div class="h1">{{ metrics.totalTenants }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center">
+          <div class="card-body">
+            <h6 class="card-title">Vacant Rooms</h6>
+            <div class="h1">{{ metrics.vacantRooms }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rent KPIs row -->
+    <div class="row mb-4">
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center bg-light">
+          <div class="card-body">
+            <h6 class="card-title text-secondary">Invoiced This Month</h6>
+            <div class="h4">₹{{ metrics.totalInvoiced | number:'1.2-2' }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center bg-light">
+          <div class="card-body">
+            <h6 class="card-title text-secondary">Received This Month</h6>
+            <div class="h4">₹{{ metrics.totalReceived | number:'1.2-2' }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center bg-light">
+          <div class="card-body">
+            <h6 class="card-title text-secondary">Due Invoices</h6>
+            <div class="h4">{{ metrics.dueInvoices }}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 mb-3">
+        <div class="card kpi-card text-center bg-light">
+          <div class="card-body">
+            <h6 class="card-title text-secondary">Overdue</h6>
+            <div class="h4 text-danger">{{ metrics.overdueInvoices }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chart placeholders (implement with ng2-charts) -->
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Rooms by Status</div>
+          <div class="card-body">
+            <canvas id="roomsStatusChart"></canvas>
+            <div class="text-muted small">[Chart will appear here]</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header">Tenants by Status</div>
+          <div class="card-body">
+            <canvas id="tenantsStatusChart"></canvas>
+            <div class="text-muted small">[Chart will appear here]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row my-4">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">Rent Collection Trend</div>
+          <div class="card-body">
+            <canvas id="rentTrendChart"></canvas>
+            <div class="text-muted small">[Line chart will appear here]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Actions (link to pages) -->
+    <div class="row mt-4">
+      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/show-all-tenants" class="btn btn-dark w-100">Manage Tenants</a></div>
+      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/add-tenant" class="btn btn-info w-100">Add Tenant</a></div>
+      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/home" class="btn btn-outline-secondary w-100">Dashboard</a></div>
+      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/login" class="btn btn-outline-primary w-100">Admin Login</a></div>
+    </div>
+  </div>
+</div>

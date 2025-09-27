@@ -1,0 +1,80 @@
+<div class="card p-4 mb-4" style="max-width: 540px; margin:auto;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="mb-0">Add Property</h3>
+    <button type="button" (click)="cancelProperty()" class="btn-close" aria-label="Close"
+      style="font-size:1.3rem;"></button>
+  </div>
+  <form #p="ngForm" (ngSubmit)="p.form.valid && addProperty()" class="row g-3 form-container" autocomplete="off">
+    <div class="form-group col-md-6">
+      <label><b>Property Name</b></label>
+      <input type="text" class="form-control" id="propertyName" [(ngModel)]="property.name" name="propertyName" required
+        minlength="3" #propertyName="ngModel" [ngClass]="{ 'is-invalid': p.submitted && propertyName.errors }" />
+      <div *ngIf="p.submitted && propertyName.errors" class="invalid-feedback">
+        <div *ngIf="propertyName.errors['required']">Property name is required</div>
+        <div *ngIf="propertyName.errors['minlength']">Property name minimum 3 characters</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Address</b></label>
+      <input type="text" class="form-control" id="propertyAddress" [(ngModel)]="property.address" name="propertyAddress"
+        required #propertyAddress="ngModel" [ngClass]="{ 'is-invalid': p.submitted && propertyAddress.errors }" />
+      <div *ngIf="p.submitted && propertyAddress.errors" class="invalid-feedback">
+        <div *ngIf="propertyAddress.errors['required']">Address is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>City</b></label>
+      <input type="text" class="form-control" id="propertyCity" [(ngModel)]="property.city" name="propertyCity" required
+        #propertyCity="ngModel" [ngClass]="{ 'is-invalid': p.submitted && propertyCity.errors }" />
+      <div *ngIf="p.submitted && propertyCity.errors" class="invalid-feedback">
+        <div *ngIf="propertyCity.errors['required']">City is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>State</b></label>
+      <input type="text" class="form-control" id="propertyState" [(ngModel)]="property.state" name="propertyState"
+        required #propertyState="ngModel" [ngClass]="{ 'is-invalid': p.submitted && propertyState.errors }" />
+      <div *ngIf="p.submitted && propertyState.errors" class="invalid-feedback">
+        <div *ngIf="propertyState.errors['required']">State is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Pincode</b></label>
+      <input type="text" class="form-control" id="propertyPincode" [(ngModel)]="property.pincode" name="propertyPincode"
+        required #propertyPincode="ngModel" [ngClass]="{ 'is-invalid': p.submitted && propertyPincode.errors }" />
+      <div *ngIf="p.submitted && propertyPincode.errors" class="invalid-feedback">
+        <div *ngIf="propertyPincode.errors['required']">Pincode is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Owner Name</b></label>
+      <input type="text" class="form-control" id="ownerName" [(ngModel)]="property.ownerName" name="ownerName"
+        #ownerName="ngModel" [ngClass]="{ 'is-invalid': p.submitted && ownerName.errors }" />
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Owner Contact No</b></label>
+      <input type="text" class="form-control" id="contactNo" [(ngModel)]="property.contactNo" name="contactNo"
+        #contactNo="ngModel" [ngClass]="{ 'is-invalid': p.submitted && contactNo.errors }" />
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>GSTIN</b></label>
+      <input type="text" class="form-control" id="gstin" [(ngModel)]="property.gstin" name="gstin" #gstin="ngModel"
+        [ngClass]="{ 'is-invalid': p.submitted && gstin.errors }" />
+    </div>
+    <div class="form-group col-md-6">
+      <label><b>Status</b></label>
+      <select class="form-select" id="propertyActive" [(ngModel)]="property.active" name="propertyActive" required
+        #propertyActive="ngModel" [ngClass]="{ 'is-invalid': p.submitted && propertyActive.errors }">
+        <option [ngValue]="true">Active</option>
+        <option [ngValue]="false">Inactive</option>
+      </select>
+      <div *ngIf="p.submitted && propertyActive.errors" class="invalid-feedback">
+        <div *ngIf="propertyActive.errors['required']">Status is required</div>
+      </div>
+    </div>
+    <div class="form-group col-md-12 d-flex justify-content-center gap-2">
+      <button class="btn btn-success full-width-button" type="submit">Add Property</button>
+      <button type="button" (click)="cancelProperty()" class="btn btn-secondary full-width-button">Cancel</button>
+    </div>
+  </form>
+</div>
