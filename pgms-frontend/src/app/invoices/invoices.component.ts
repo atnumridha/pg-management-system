@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { InvoiceService, Invoice } from '../invoice.service';
 import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
+import { faPlus, faEdit, faTrash, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-invoices',
@@ -9,7 +10,9 @@ import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
   <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center">
       <h2>Invoices</h2>
-      <button class="btn btn-primary" (click)="openAddInvoice()">Add Invoice</button>
+      <button class="btn btn-primary" (click)="openAddInvoice()" aria-label="Add Invoice">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
     </div>
     <hr>
     <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
@@ -23,7 +26,9 @@ import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
           <th>Due Date</th>
           <th>Total</th>
           <th>Status</th>
-          <th>Actions</th>
+          <th>
+            <fa-icon [icon]="faBars" aria-label="Actions"></fa-icon>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -41,8 +46,12 @@ import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
             </span>
           </td>
           <td>
-            <button class="btn btn-sm btn-secondary me-2" (click)="openEditInvoice(inv)">Edit</button>
-            <button class="btn btn-sm btn-danger" (click)="deleteInvoice(inv)">Delete</button>
+            <button class="btn btn-sm btn-secondary me-2" (click)="openEditInvoice(inv)" aria-label="Edit Invoice">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteInvoice(inv)" aria-label="Delete Invoice">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -55,6 +64,10 @@ import { AddInvoiceComponent } from '../add-invoice/add-invoice.component';
   styleUrls: []
 })
 export class InvoicesComponent implements OnInit {
+  faPlus = faPlus;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faBars = faBars;
   invoices: Invoice[] = [];
   loading = true;
   error = '';

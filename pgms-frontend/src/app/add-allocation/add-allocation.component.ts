@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AllocationService, Allocation } from '../allocation.service';
 import { TenantService } from '../tenant.service';
 import { RoomService } from '../room.service';
@@ -29,12 +29,16 @@ export class AddAllocationComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddAllocationComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private allocationService: AllocationService,
     private tenantService: TenantService,
     private roomService: RoomService
   ) {}
 
   ngOnInit() {
+    if (this.data?.allocation) {
+      this.allocation = { ...this.data.allocation };
+    }
     this.tenantService.getAll().subscribe({
       next: tenants => this.tenants = tenants,
       error: () => this.tenants = []

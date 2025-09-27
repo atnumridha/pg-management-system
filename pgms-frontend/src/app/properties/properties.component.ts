@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PropertyService, Property } from '../property.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPropertyComponent } from '../add-property/add-property.component';
+import { faPlus, faEdit, faTrash, faBars, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-properties',
@@ -9,6 +10,13 @@ import { AddPropertyComponent } from '../add-property/add-property.component';
   styleUrls: ['./properties.component.css']
 })
 export class PropertiesComponent implements OnInit {
+  faPlus = faPlus;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faBars = faBars;
+  faSave = faSave;
+  faTimes = faTimes;
+
   properties: Property[] = [];
   loading = true;
   error = '';

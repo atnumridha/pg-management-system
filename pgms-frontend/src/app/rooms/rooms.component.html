@@ -8,7 +8,14 @@
       <input class="form-control" [(ngModel)]="searchTerm" placeholder="Search rooms...">
     </div>
     <div class="col-4 mb-2 text-end">
-      <button class="btn btn-primary" (click)="showAddForm = !showAddForm">{{ showAddForm ? 'Cancel' : '+ Add Room' }}</button>
+      <button class="btn btn-primary" (click)="showAddForm = !showAddForm" [attr.aria-label]="showAddForm ? 'Cancel' : 'Add Room'">
+        <ng-container *ngIf="showAddForm; else addIcon">
+          Cancel
+        </ng-container>
+        <ng-template #addIcon>
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </ng-template>
+      </button>
     </div>
   </div>
   <form *ngIf="showAddForm" (ngSubmit)="addRoom()" class="mb-3 card card-body">
@@ -62,7 +69,9 @@
         <th>Status</th>
         <th>Amenities</th>
         <th>Property ID</th>
-        <th>Actions</th>
+        <th>
+          <fa-icon [icon]="faBars" aria-label="Actions"></fa-icon>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -81,8 +90,14 @@
           <td>{{ room.amenities || '-' }}</td>
           <td>{{ room.propertyId }}</td>
           <td>
-            <button class="btn btn-sm btn-info me-2" (click)="beginEdit(room)">Edit</button>
-            <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.id)">Delete</button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-sm btn-info me-2" (click)="beginEdit(room)" aria-label="Edit Room">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteRoom(room.id)" aria-label="Delete Room">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </div>
           </td>
         </ng-container>
         <ng-template #editRow>
@@ -107,8 +122,14 @@
             </select>
           </td>
           <td>
-            <button class="btn btn-success btn-sm me-2" (click)="saveEdit()">Save</button>
-            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-success btn-sm me-2" (click)="saveEdit()" aria-label="Save">
+                <fa-icon [icon]="faSave"></fa-icon>
+              </button>
+              <button class="btn btn-secondary btn-sm" (click)="cancelEdit()" aria-label="Cancel">
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+            </div>
           </td>
         </ng-template>
       </tr>

@@ -6,7 +6,9 @@
       <input class="form-control" [(ngModel)]="searchTerm" placeholder="Search tenants...">
     </div>
     <div class="col-4 mb-2 text-end">
-      <button class="btn btn-primary" (click)="openAddTenantDialog()">+ Add Tenant</button>
+      <button class="btn btn-primary" (click)="openAddTenantDialog()" aria-label="Add Tenant">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
     </div>
   </div>
 
@@ -20,7 +22,9 @@
         <th>KYC Type</th>
         <th>KYC ID</th>
         <th>Status</th>
-        <th>Actions</th>
+        <th>
+          <fa-icon [icon]="faBars" aria-label="Actions"></fa-icon>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -36,8 +40,14 @@
             <span [class]="tenant.status === 'ACTIVE' ? 'badge bg-success' : 'badge bg-secondary'">{{ tenant.status }}</span>
           </td>
           <td>
-            <button class="btn btn-sm btn-info me-2" (click)="beginEdit(tenant)">Edit</button>
-            <button class="btn btn-sm btn-danger" (click)="deleteTenant(tenant.id)">Delete</button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-sm btn-info me-2" (click)="beginEdit(tenant)" aria-label="Edit Tenant">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteTenant(tenant.id)" aria-label="Delete Tenant">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </div>
           </td>
         </ng-container>
         <ng-template #editRow>
@@ -55,8 +65,14 @@
             </select>
           </td>
           <td>
-            <button class="btn btn-success btn-sm me-2" (click)="saveEdit()">Save</button>
-            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-success btn-sm me-2" (click)="saveEdit()" aria-label="Save">
+                <fa-icon [icon]="faSave"></fa-icon>
+              </button>
+              <button class="btn btn-secondary btn-sm" (click)="cancelEdit()" aria-label="Cancel">
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+            </div>
           </td>
         </ng-template>
       </tr>

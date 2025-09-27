@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AllocationService, Allocation } from '../allocation.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddAllocationComponent } from '../add-allocation/add-allocation.component';
+import { faPlus, faBars, faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-allocations',
@@ -9,7 +10,9 @@ import { AddAllocationComponent } from '../add-allocation/add-allocation.compone
   <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center">
       <h2>Allocations (Tenant-Room Assignments)</h2>
-      <button class="btn btn-primary" (click)="openAddAllocation()">Add Allocation</button>
+      <button class="btn btn-primary" (click)="openAddAllocation()" aria-label="Add Allocation">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
     </div>
     <hr>
     <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
@@ -23,6 +26,9 @@ import { AddAllocationComponent } from '../add-allocation/add-allocation.compone
           <th>End Date</th>
           <th>Monthly Rent</th>
           <th>Status</th>
+          <th>
+            <fa-icon [icon]="faBars" aria-label="Actions"></fa-icon>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -37,6 +43,14 @@ import { AddAllocationComponent } from '../add-allocation/add-allocation.compone
               {{ alloc.status }}
             </span>
           </td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="editAllocation(alloc)" aria-label="Edit Allocation">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteAllocation(alloc)" aria-label="Delete Allocation">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
+          </td>
         </tr>
       </tbody>
     </table>
@@ -48,6 +62,10 @@ import { AddAllocationComponent } from '../add-allocation/add-allocation.compone
   styleUrls: []
 })
 export class AllocationsComponent implements OnInit {
+  faPlus = faPlus;
+  faBars = faBars;
+  faEdit = faEdit;
+  faTrash = faTrash;
   allocations: Allocation[] = [];
   loading = true;
   error = '';
@@ -79,5 +97,27 @@ export class AllocationsComponent implements OnInit {
         this.loadAllocations();
       }
     });
+  }
+
+  editAllocation(allocation: Allocation) {
+    const dialogRef = this.dialog.open(AddAllocationComponent, {
+      width: '520px',
+      data: { allocation, edit: true }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'updated') {
+        this.loadAllocations();
+      }
+    });
+  }
+
+  deleteAllocation(allocation: Allocation) {
+    if (!allocation.id) return;
+    if (confirm('Are you sure you want to delete this allocation?')) {
+      this.allocationService.delete(allocation.id).subscribe({
+        next: () => this.loadAllocations(),
+        error: err => this.error = 'Failed to delete allocation'
+      });
+    }
   }
 }

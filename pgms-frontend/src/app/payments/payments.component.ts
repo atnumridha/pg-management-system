@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentService, Payment } from '../payment.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AddPaymentComponent } from '../add-payment/add-payment.component';
+import { faPlus, faEdit, faTrash, faBars } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-payments',
@@ -9,7 +10,9 @@ import { AddPaymentComponent } from '../add-payment/add-payment.component';
   <div class="container my-4">
     <div class="d-flex justify-content-between align-items-center">
       <h2>Payments</h2>
-      <button class="btn btn-primary" (click)="openAddPayment()">Add Payment</button>
+      <button class="btn btn-primary" (click)="openAddPayment()" aria-label="Add Payment">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
     </div>
     <hr>
     <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
@@ -23,7 +26,9 @@ import { AddPaymentComponent } from '../add-payment/add-payment.component';
           <th>Reference</th>
           <th>Paid At</th>
           <th>Status</th>
-          <th>Actions</th>
+          <th>
+            <fa-icon [icon]="faBars" aria-label="Actions"></fa-icon>
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -39,8 +44,12 @@ import { AddPaymentComponent } from '../add-payment/add-payment.component';
             </span>
           </td>
           <td>
-            <button class="btn btn-sm btn-secondary me-2" (click)="openEditPayment(payment)">Edit</button>
-            <button class="btn btn-sm btn-danger" (click)="deletePayment(payment)">Delete</button>
+            <button class="btn btn-sm btn-secondary me-2" (click)="openEditPayment(payment)" aria-label="Edit Payment">
+              <fa-icon [icon]="faEdit"></fa-icon>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deletePayment(payment)" aria-label="Delete Payment">
+              <fa-icon [icon]="faTrash"></fa-icon>
+            </button>
           </td>
         </tr>
       </tbody>
@@ -53,6 +62,10 @@ import { AddPaymentComponent } from '../add-payment/add-payment.component';
   styleUrls: []
 })
 export class PaymentsComponent implements OnInit {
+  faPlus = faPlus;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faBars = faBars;
   payments: Payment[] = [];
   loading = true;
   error = '';

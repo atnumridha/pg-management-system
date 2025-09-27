@@ -1,34 +1,128 @@
 <!-- DEBUG: isLoggedInFlag = {{ isLoggedInFlag }} -->
-<nav class="navbar navbar-expand-sm border-bottom border-body" data-bs-theme="dark">
-  <ul class="navbar-nav">
-    <li class="nav-item" *ngIf="isLoggedInFlag">
-      <a routerLink="home" routerLinkActive="active" class="nav-link" tabindex="0">Dashboard</a>
-    </li>
-    <li class="nav-item" *ngIf="isLoggedInFlag">
-      <a routerLink="show-all-tenants" routerLinkActive="active" class="nav-link" tabindex="0">Tenants</a>
-    </li>
-    <li class="nav-item" *ngIf="isLoggedInFlag">
-      <a routerLink="rooms" routerLinkActive="active" class="nav-link" tabindex="0">Rooms</a>
-    </li>
-    <li class="nav-item" *ngIf="isLoggedInFlag">
-      <a routerLink="properties" routerLinkActive="active" class="nav-link" tabindex="0">Properties</a>
-    </li>
-    <li class="nav-item" *ngIf="isLoggedInFlag">
-      <a routerLink="invoices" routerLinkActive="active" class="nav-link" tabindex="0">Invoices</a>
-    </li>
-    <li class="nav-item" *ngIf="isLoggedInFlag">
-      <a routerLink="payments" routerLinkActive="active" class="nav-link" tabindex="0">Payments</a>
-    </li>
-    <li class="nav-item" *ngIf="isLoggedInFlag">
-      <a routerLink="allocations" routerLinkActive="active" class="nav-link" tabindex="0">Allocations</a>
-    </li>
-  </ul>
-  <ul class="navbar-nav ms-auto">
-    <li class="nav-item" style="margin-right: 4rem;" *ngIf="!isLoggedInFlag">
-      <a routerLink="login" routerLinkActive="active" class="nav-link" tabindex="0">Admin Login</a>
-    </li>
-    <li class="nav-item" style="margin-right: 4rem;" *ngIf="isLoggedInFlag">
-      <a routerLink="login" class="nav-link" (click)="logout()" tabindex="0">Logout</a>
+<nav class="navbar border-bottom border-body" data-bs-theme="dark" role="navigation">
+  <!-- Hamburger (Mobile Only) -->
+  <button
+    class="navbar-toggler"
+    type="button"
+    aria-label="Toggle menu"
+    (click)="toggleHamburgerMenu()"
+    [attr.aria-expanded]="hamburgerMenuOpen"
+    [attr.aria-controls]="'mainMenu'"
+    *ngIf="isLoggedInFlag"
+  >
+    <fa-icon [icon]="['fas','bars']"></fa-icon>
+  </button>
+
+  <!-- Overlay for drawer (shows on mobile when open) -->
+  <div class="drawer-overlay" *ngIf="hamburgerMenuOpen" (click)="closeHamburgerMenu()" aria-hidden="true"></div>
+
+  <!-- Collapsible/drawer menu -->
+  <div
+    [ngClass]="{'drawer': true, 'open': hamburgerMenuOpen, 'drawer-hide': !hamburgerMenuOpen}"
+    id="mainMenu"
+    [attr.aria-hidden]="!hamburgerMenuOpen"
+    tabindex="-1"
+    (keydown.escape)="closeHamburgerMenu()"
+    *ngIf="isLoggedInFlag"
+  >
+    <ul class="navbar-nav flex-column">
+      <li class="nav-item">
+        <a routerLink="home" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+          <fa-icon [icon]="['fas','gauge']"></fa-icon>&nbsp;Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="properties" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+          <fa-icon [icon]="['fas','building']"></fa-icon>&nbsp;Properties
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="rooms" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+          <fa-icon [icon]="['fas','bed']"></fa-icon>&nbsp;Rooms
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="show-all-tenants" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+          <fa-icon [icon]="['fas','users']"></fa-icon>&nbsp;Tenants
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="allocations" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+          <fa-icon [icon]="['fas','cubes']"></fa-icon>&nbsp;Allocations
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="invoices" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+          <fa-icon [icon]="['fas','file-invoice-dollar']"></fa-icon>&nbsp;Invoices
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="payments" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+          <fa-icon [icon]="['fas','money-bill-wave']"></fa-icon>&nbsp;Payments
+        </a>
+      </li>
+      <li class="nav-item mt-3">
+        <a routerLink="login" class="nav-link" (click)="logout(); closeHamburgerMenu()" tabindex="0">
+          <fa-icon [icon]="['fas','sign-out-alt']"></fa-icon>&nbsp;Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Desktop menu -->
+  <div class="d-flex w-100 d-none d-sm-flex" *ngIf="isLoggedInFlag">
+    <ul class="navbar-nav flex-row flex-grow-1">
+      <li class="nav-item">
+        <a routerLink="home" routerLinkActive="active" class="nav-link" tabindex="0">
+          <fa-icon [icon]="['fas','gauge']"></fa-icon>&nbsp;Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="properties" routerLinkActive="active" class="nav-link" tabindex="0">
+          <fa-icon [icon]="['fas','building']"></fa-icon>&nbsp;Properties
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="rooms" routerLinkActive="active" class="nav-link" tabindex="0">
+          <fa-icon [icon]="['fas','bed']"></fa-icon>&nbsp;Rooms
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="show-all-tenants" routerLinkActive="active" class="nav-link" tabindex="0">
+          <fa-icon [icon]="['fas','users']"></fa-icon>&nbsp;Tenants
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="allocations" routerLinkActive="active" class="nav-link" tabindex="0">
+          <fa-icon [icon]="['fas','cubes']"></fa-icon>&nbsp;Allocations
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="invoices" routerLinkActive="active" class="nav-link" tabindex="0">
+          <fa-icon [icon]="['fas','file-invoice-dollar']"></fa-icon>&nbsp;Invoices
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="payments" routerLinkActive="active" class="nav-link" tabindex="0">
+          <fa-icon [icon]="['fas','money-bill-wave']"></fa-icon>&nbsp;Payments
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav flex-row ms-auto">
+      <li class="nav-item me-5">
+        <a routerLink="login" class="nav-link" (click)="logout()" tabindex="0">
+          <fa-icon [icon]="['fas','sign-out-alt']"></fa-icon>&nbsp;Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Login link on desktop (right aligned) -->
+  <ul class="navbar-nav ms-auto d-none d-sm-flex" *ngIf="!isLoggedInFlag">
+    <li class="nav-item">
+      <a routerLink="login" routerLinkActive="active" class="nav-link" tabindex="0">
+        <fa-icon [icon]="['fas','sign-in-alt']"></fa-icon>&nbsp;Admin Login
+      </a>
     </li>
   </ul>
 </nav>
@@ -37,6 +131,9 @@
 
 <footer *ngIf="isLoggedInFlag" class="footer">
   <div class="container">
-    <span>Paying Guest Management System</span>
+    <span>
+      <fa-icon [icon]="['fas','building']" style="font-size:18px"></fa-icon>&nbsp;
+      Paying Guest Management System
+    </span>
   </div>
 </footer>

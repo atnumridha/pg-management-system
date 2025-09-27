@@ -1,14 +1,13 @@
-.nav-item{color:white;
-    margin-left: 2.5rem ;
+.nav-item {
+    color: white;
+    margin-left: 2.5rem;
     font-size: 1rem;
-    
+    display: flex;
+    align-items: center;
 }
 
-
-
-.navbar{
+.navbar {
     color: white;
-    
     background-color: black;
     position: sticky;
     top: 0;
@@ -16,13 +15,92 @@
     font-size: 3rem;
 }
 
+/* Drawer styles: hidden by default, slides in from left on mobile */
+.drawer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    max-width: 90vw;
+    height: 100%;
+    background: #222;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+    z-index: 1100;
+    overflow-y: auto;
+    transform: translateX(-100%);
+    transition: transform 0.25s cubic-bezier(.4,0,.2,1);
+    padding-top: 60px;
+    border-right: 1px solid #111;
+    display: block;
+}
+.drawer.open {
+    transform: translateX(0);
+}
+.drawer-hide {
+    display: none;
+}
+.drawer .nav-link, .drawer .nav-item {
+    color: #fff;
+    font-size: 1.12rem;
+    padding: 0.75rem 1.5rem;
+}
+.drawer .nav-link.active {
+    color: #d5bdff;
+    background: #272639;
+    border-radius: 5px;
+}
+.drawer .fa-icon {
+    min-width: 22px;
+    text-align: center;
+}
+
+.drawer .nav-item + .nav-item {
+    margin-top: 10px;
+}
+
+/* Only show drawer/hamburger on extra-small & small screens (<576px) */
+@media (min-width: 576px) {
+    .drawer, .drawer.open {
+        display: none !important;
+    }
+    .navbar-toggler {
+        display: none !important;
+    }
+}
+
+.navbar-toggler {
+    background: none;
+    border: none;
+    color: #fff;
+    margin: 10px 0 10px 15px;
+    z-index: 1200;
+    font-size: 2rem;
+}
+
+/* Overlay for mobile menu */
+.drawer-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1099;
+    background: rgba(0,0,0,0.48);
+}
+
+.footer {
+    background-color: #1a1a1a;
+    color: #fafafa;
+    font-size: 1rem;
+    padding: 0.65rem 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 35px;
+}
 
 .logout-option {
     display: none;
 }
-
 .nav-item:hover .logout-option {
-    /* display: inline; */
-
     display: block;
 }

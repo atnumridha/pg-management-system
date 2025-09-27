@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RoomService, Room } from '../room.service';
 import { PropertyService, Property } from '../property.service';
+import { faPlus, faEdit, faTrash, faBars, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-rooms',
@@ -8,6 +9,12 @@ import { PropertyService, Property } from '../property.service';
   styleUrls: ['./rooms.component.css']
 })
 export class RoomsComponent implements OnInit {
+  faPlus = faPlus;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faBars = faBars;
+  faSave = faSave;
+  faTimes = faTimes;
   rooms: Room[] = [];
   loading = true;
   error = '';

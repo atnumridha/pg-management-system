@@ -8,7 +8,8 @@
     <!-- KPI Cards row -->
     <div class="row mb-4">
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none" [routerLink]="['/properties']" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/properties']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Properties</h6>
             <div class="h1">{{ metrics.totalProperties }}</div>
@@ -16,7 +17,8 @@
         </a>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none" [routerLink]="['/rooms']" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/rooms']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Rooms</h6>
             <div class="h1">{{ metrics.totalRooms }}</div>
@@ -24,7 +26,8 @@
         </a>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none" [routerLink]="['/show-all-tenants']" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/show-all-tenants']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Tenants</h6>
             <div class="h1">{{ metrics.totalTenants }}</div>
@@ -32,7 +35,8 @@
         </a>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none" [routerLink]="['/rooms']" [queryParams]="{ status: 'AVAILABLE' }" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/rooms']" [queryParams]="{ status: 'AVAILABLE' }" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Vacant Rooms</h6>
             <div class="h1">{{ metrics.vacantRooms }}</div>
@@ -44,7 +48,8 @@
     <!-- Rent KPIs row -->
     <div class="row mb-4">
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none" [routerLink]="['/invoices']" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/invoices']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Invoiced This Month</h6>
             <div class="h4">₹{{ metrics.totalInvoiced | number:'1.2-2' }}</div>
@@ -52,7 +57,8 @@
         </a>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none" [routerLink]="['/payments']" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/payments']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Received This Month</h6>
             <div class="h4">₹{{ metrics.totalReceived | number:'1.2-2' }}</div>
@@ -60,7 +66,8 @@
         </a>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none" [routerLink]="['/invoices']" [queryParams]="{ status: 'DUE' }" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/invoices']" [queryParams]="{ status: 'DUE' }" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Due Invoices</h6>
             <div class="h4">{{ metrics.dueInvoices }}</div>
@@ -68,7 +75,8 @@
         </a>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none" [routerLink]="['/invoices']" [queryParams]="{ status: 'OVERDUE' }" style="cursor:pointer;" tabIndex="0">
+        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+          [routerLink]="['/invoices']" [queryParams]="{ status: 'OVERDUE' }" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Overdue</h6>
             <div class="h4 text-danger">{{ metrics.overdueInvoices }}</div>
@@ -94,11 +102,7 @@
         <div class="card">
           <div class="card-header">Tenants by Status</div>
           <div class="card-body">
-            <ngx-charts-pie-chart
-              [results]="tenantsByStatus"
-              [legend]="true"
-              [doughnut]="true"
-              [labels]="true"
+            <ngx-charts-pie-chart [results]="tenantsByStatus" [legend]="true" [doughnut]="true" [labels]="true"
               [scheme]="'vivid'">
             </ngx-charts-pie-chart>
           </div>
@@ -111,25 +115,12 @@
         <div class="card">
           <div class="card-header">Rent Collection Trend</div>
           <div class="card-body">
-            <ngx-charts-bar-vertical [results]="rentTrend"
-              [xAxis]="true" [yAxis]="true" [legend]="false"
-              [scheme]="'vivid'" [animations]="true"
-              [showXAxisLabel]="true" [showYAxisLabel]="true"
-              xAxisLabel="Month" yAxisLabel="₹ Collected">
+            <ngx-charts-bar-vertical [results]="rentTrend" [xAxis]="true" [yAxis]="true" [legend]="false"
+              [scheme]="'vivid'" [animations]="true" [showXAxisLabel]="true" [showYAxisLabel]="true" xAxisLabel="Month"
+              yAxisLabel="₹ Collected">
             </ngx-charts-bar-vertical>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- Quick Actions (link to pages) -->
-    <div class="row mt-4">
-      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/show-all-tenants" class="btn btn-dark w-100">Manage
-          Tenants</a></div>
-      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/add-tenant" class="btn btn-info w-100">Add Tenant</a></div>
-      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/home" class="btn btn-outline-secondary w-100">Dashboard</a>
-      </div>
-      <div class="col-md-3 col-sm-6 mb-2"><a routerLink="/login" class="btn btn-outline-primary w-100">Admin Login</a>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ import { TenantService } from '../tenant.service';
 import { Tenant } from '../tenant';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTenantComponent } from '../add-tenant/add-tenant.component';
+import { faPlus, faEdit, faTrash, faBars, faSave, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-tenant-list',
@@ -10,6 +11,12 @@ import { AddTenantComponent } from '../add-tenant/add-tenant.component';
   styleUrls: ['./tenant-list.component.css']
 })
 export class TenantListComponent implements OnInit {
+  faPlus = faPlus;
+  faEdit = faEdit;
+  faTrash = faTrash;
+  faBars = faBars;
+  faSave = faSave;
+  faTimes = faTimes;
 
   // For property add form UX, model, and filtering
   public propertySearchTerm: string = '';

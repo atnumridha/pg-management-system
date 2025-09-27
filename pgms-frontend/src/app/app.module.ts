@@ -27,6 +27,7 @@ import { AddPaymentComponent } from './add-payment/add-payment.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { AddAllocationComponent } from './add-allocation/add-allocation.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { AddAllocationComponent } from './add-allocation/add-allocation.componen
     HttpClientModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    NgxChartsModule
+    NgxChartsModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

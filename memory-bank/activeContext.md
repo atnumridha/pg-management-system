@@ -5,6 +5,7 @@
 - Ensuring all recent fixes—including CRUD and dashboard feature enhancements—are fully documented.
 
 ## Recent Changes
+- FontAwesome icon type error in Angular resolved by aligning all @fortawesome packages to v6.4.2 and reinstalling node_modules.
 - KPI cards ("Rooms", "Tenants", "Vacant Rooms", "Properties", "Invoiced", "Received", "Due", "Overdue") now use <a> routerLink with href and tabIndex for mobile-friendly and accessible navigation.
 - Charts: switched Tenants by Status between horizontal bar and doughnut, finalized on doughnut for recognition and distinction.
 - Bar chart is now used for Rent Collection Trend for always-visible data.
@@ -22,12 +23,14 @@
 - For charts: use explicit and visually distinctive color schemes, always use supported and visible chart attributes, default to bar/doughnut first for clarity.
 
 ## Learnings & Project Insights
+- @fortawesome/* npm package versions must match exactly to avoid Angular/TypeScript type errors and runtime icon failures.
 - Ngx-charts color schemes, accessibility, and routerLink integration require careful coordination between Angular module setup, component template, and CSS.
 - Angular 16.x standalone component patterns for dashboard and full-app routing are now well established across the project for maintainability.
 
 ---
 
 ## 10 Most Recent Events (sliding window)
+- 27/09/2025: Fixed Angular FontAwesome dependency conflict (icon type error) by downgrading @fortawesome/fontawesome-free to v6.4.2, pruning lockfile/node_modules, reinstalling, and verifed error-free build.
 - 27/09/2025: Final dashboard navigation polish—clickable cards fully accessible and working.
 - 27/09/2025: Chart visibility, color, and shape improved for Rent Trend, Tenants by Status, etc.
 - 27/09/2025: Payment CRUD, paidAt patching and status handling now robust.
@@ -37,4 +40,3 @@
 - 27/09/2025: Full CRUD for invoices and payments; dashboard, edit, delete for all entity screens.
 - 27/09/2025: Standalone and classic module integration, router navigation assured via routerLink.
 - 27/09/2025: Workspace migrations, version pinning, and package sync locked at Angular 16.x plus ngx-charts 20.x.
-- 27/09/2025: Memory bank update behind all major feature and bugfix changes.

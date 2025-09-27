@@ -8,7 +8,9 @@
       <input class="form-control" [(ngModel)]="searchTerm" placeholder="Search properties...">
     </div>
     <div class="col-4 mb-2 text-end">
-      <button class="btn btn-primary" (click)="openAddPropertyDialog()">+ Add Property</button>
+      <button class="btn btn-primary" (click)="openAddPropertyDialog()" aria-label="Add Property">
+        <fa-icon [icon]="faPlus"></fa-icon>
+      </button>
     </div>
   </div>
 
@@ -20,7 +22,9 @@
         <th>City</th>
         <th>Owner</th>
         <th>Active</th>
-        <th>Actions</th>
+        <th>
+          <fa-icon [icon]="faBars" aria-label="Actions"></fa-icon>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -36,8 +40,14 @@
             </span>
           </td>
           <td>
-            <button class="btn btn-sm btn-info me-2" (click)="beginEdit(property)">Edit</button>
-            <button class="btn btn-sm btn-danger" (click)="deleteProperty(property.id)">Delete</button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-sm btn-info me-2" (click)="beginEdit(property)" aria-label="Edit Property">
+                <fa-icon [icon]="faEdit"></fa-icon>
+              </button>
+              <button class="btn btn-sm btn-danger" (click)="deleteProperty(property.id)" aria-label="Delete Property">
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </div>
           </td>
         </ng-container>
         <ng-template #editRow>
@@ -51,8 +61,14 @@
             </label>
           </td>
           <td>
-            <button class="btn btn-success btn-sm me-2" (click)="saveEdit()">Save</button>
-            <button class="btn btn-secondary btn-sm" (click)="cancelEdit()">Cancel</button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-success btn-sm me-2" (click)="saveEdit()" aria-label="Save">
+                <fa-icon [icon]="faSave"></fa-icon>
+              </button>
+              <button class="btn btn-secondary btn-sm" (click)="cancelEdit()" aria-label="Cancel">
+                <fa-icon [icon]="faTimes"></fa-icon>
+              </button>
+            </div>
           </td>
         </ng-template>
       </tr>
