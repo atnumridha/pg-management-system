@@ -1,15 +1,8 @@
 <!-- DEBUG: isLoggedInFlag = {{ isLoggedInFlag }} -->
 <nav class="navbar border-bottom border-body" data-bs-theme="dark" role="navigation">
   <!-- Hamburger (Mobile Only) -->
-  <button
-    class="navbar-toggler"
-    type="button"
-    aria-label="Toggle menu"
-    (click)="toggleHamburgerMenu()"
-    [attr.aria-expanded]="hamburgerMenuOpen"
-    [attr.aria-controls]="'mainMenu'"
-    *ngIf="isLoggedInFlag"
-  >
+  <button class="navbar-toggler" type="button" aria-label="Toggle menu" (click)="toggleHamburgerMenu()"
+    [attr.aria-expanded]="hamburgerMenuOpen" [attr.aria-controls]="'mainMenu'" *ngIf="isLoggedInFlag">
     <fa-icon [icon]="['fas','bars']"></fa-icon>
   </button>
 
@@ -17,14 +10,9 @@
   <div class="drawer-overlay" *ngIf="hamburgerMenuOpen" (click)="closeHamburgerMenu()" aria-hidden="true"></div>
 
   <!-- Collapsible/drawer menu -->
-  <div
-    [ngClass]="{'drawer': true, 'open': hamburgerMenuOpen, 'drawer-hide': !hamburgerMenuOpen}"
-    id="mainMenu"
-    [attr.aria-hidden]="!hamburgerMenuOpen"
-    tabindex="-1"
-    (keydown.escape)="closeHamburgerMenu()"
-    *ngIf="isLoggedInFlag"
-  >
+  <div [ngClass]="{'drawer': true, 'open': hamburgerMenuOpen, 'drawer-hide': !hamburgerMenuOpen}" id="mainMenu"
+    [attr.aria-hidden]="!hamburgerMenuOpen" tabindex="-1" (keydown.escape)="closeHamburgerMenu()"
+    *ngIf="isLoggedInFlag">
     <ul class="navbar-nav flex-column">
       <li class="nav-item">
         <a routerLink="home" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
@@ -32,7 +20,8 @@
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="properties" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+        <a routerLink="properties" routerLinkActive="active" class="nav-link" tabindex="0"
+          (click)="closeHamburgerMenu()">
           <fa-icon [icon]="['fas','building']"></fa-icon>&nbsp;Properties
         </a>
       </li>
@@ -42,12 +31,14 @@
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="show-all-tenants" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+        <a routerLink="show-all-tenants" routerLinkActive="active" class="nav-link" tabindex="0"
+          (click)="closeHamburgerMenu()">
           <fa-icon [icon]="['fas','users']"></fa-icon>&nbsp;Tenants
         </a>
       </li>
       <li class="nav-item">
-        <a routerLink="allocations" routerLinkActive="active" class="nav-link" tabindex="0" (click)="closeHamburgerMenu()">
+        <a routerLink="allocations" routerLinkActive="active" class="nav-link" tabindex="0"
+          (click)="closeHamburgerMenu()">
           <fa-icon [icon]="['fas','cubes']"></fa-icon>&nbsp;Allocations
         </a>
       </li>
@@ -108,6 +99,33 @@
         </a>
       </li>
     </ul>
+    <!-- GLOBAL SEARCH between payments and logout -->
+    <form class="d-flex align-items-center mx-3" style="min-width:320px;max-width:400px"
+      (submit)="onGlobalSearchSubmit($event)">
+      <input type="search" class="form-control" style="min-width:200px" [(ngModel)]="globalSearchTerm"
+        (input)="filterGlobalSearch()" [attr.autocomplete]="'off'" name="globalSearch"
+        placeholder="Search for property, room, tenant, etc" aria-label="Global search"
+        [attr.aria-expanded]="showGlobalDropdown" (focus)="showGlobalDropdown = true" (blur)="onGlobalBlur()" />
+      <div class="dropdown-menu mat-search-menu shadow show"
+        *ngIf="showGlobalDropdown && globalFilteredResults.length > 0"
+        style="position:absolute;top:100%;left:0;right:0;z-index:1030;border-radius:12px;background:#fff1;overflow:hidden;">
+        <ng-container *ngFor="let result of globalFilteredResults">
+          <button type="button" class="dropdown-item mat-search-item" (mousedown)="onGlobalSelect(result)"
+            [ngStyle]="{'border-bottom':'1px solid #ececec','background':'#fff', 'padding':'0.5rem 1.1rem','display':'flex','align-items':'center','gap':'1rem','font-size':'1rem','overflow':'hidden','position':'relative'}"
+            style="transition:background 0.2s;" (click)="animateSearchRipple($event)">
+            <span class="mat-search-ripple"></span>
+            <span style="display:flex;flex-direction:column;align-items: flex-start;width:100%;">
+              <span style="font-size:0.96em;font-weight:600;line-height:1.08; color:#444;"
+                [innerHTML]="result.summary"></span>
+              <span style="font-size:0.77em;margin-top:1px;">
+                <b [ngClass]="'entitytype-'+result.entityType.toLowerCase()"
+                  style="font-weight:600;color:#cb3f3f;">{{result.entityType}}</b>
+              </span>
+            </span>
+          </button>
+        </ng-container>
+      </div>
+    </form>
     <ul class="navbar-nav flex-row ms-auto">
       <li class="nav-item me-5">
         <a routerLink="login" class="nav-link" (click)="logout()" tabindex="0">

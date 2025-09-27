@@ -8,80 +8,168 @@
     <!-- KPI Cards row -->
     <div class="row mb-4">
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.totalProperties > 0; else propertiesStatic"
+          href="#"
+          class="card kpi-card material-blue text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/properties']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Properties</h6>
             <div class="h1">{{ metrics.totalProperties }}</div>
           </div>
         </a>
+        <ng-template #propertiesStatic>
+          <div class="card kpi-card text-center text-muted d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title">Properties</h6>
+              <div class="h1">{{ metrics.totalProperties }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.totalRooms > 0; else roomsStatic"
+          href="#"
+          class="card kpi-card material-teal text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/rooms']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Rooms</h6>
             <div class="h1">{{ metrics.totalRooms }}</div>
           </div>
         </a>
+        <ng-template #roomsStatic>
+          <div class="card kpi-card text-center text-muted d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title">Rooms</h6>
+              <div class="h1">{{ metrics.totalRooms }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.totalTenants > 0; else tenantsStatic"
+          href="#"
+          class="card kpi-card material-green text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/show-all-tenants']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Tenants</h6>
             <div class="h1">{{ metrics.totalTenants }}</div>
           </div>
         </a>
+        <ng-template #tenantsStatic>
+          <div class="card kpi-card text-center text-muted d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title">Tenants</h6>
+              <div class="h1">{{ metrics.totalTenants }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.vacantRooms > 0; else vacantRoomsStatic"
+          href="#"
+          class="card kpi-card material-purple text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/rooms']" [queryParams]="{ status: 'AVAILABLE' }" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title">Vacant Rooms</h6>
             <div class="h1">{{ metrics.vacantRooms }}</div>
           </div>
         </a>
+        <ng-template #vacantRoomsStatic>
+          <div class="card kpi-card text-center text-muted d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title">Vacant Rooms</h6>
+              <div class="h1">{{ metrics.vacantRooms }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
 
     <!-- Rent KPIs row -->
     <div class="row mb-4">
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.totalInvoiced > 0; else invoicedStatic"
+          href="#"
+          class="card kpi-card material-orange text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/invoices']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Invoiced This Month</h6>
             <div class="h4">₹{{ metrics.totalInvoiced | number:'1.2-2' }}</div>
           </div>
         </a>
+        <ng-template #invoicedStatic>
+          <div class="card kpi-card text-center text-muted bg-light d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title text-secondary">Invoiced This Month</h6>
+              <div class="h4">₹{{ metrics.totalInvoiced | number:'1.2-2' }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.totalReceived > 0; else receivedStatic"
+          href="#"
+          class="card kpi-card material-green text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/payments']" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Received This Month</h6>
             <div class="h4">₹{{ metrics.totalReceived | number:'1.2-2' }}</div>
           </div>
         </a>
+        <ng-template #receivedStatic>
+          <div class="card kpi-card text-center text-muted bg-light d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title text-secondary">Received This Month</h6>
+              <div class="h4">₹{{ metrics.totalReceived | number:'1.2-2' }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.dueInvoices > 0; else dueStatic"
+          href="#"
+          class="card kpi-card material-amber text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/invoices']" [queryParams]="{ status: 'DUE' }" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Due Invoices</h6>
             <div class="h4">{{ metrics.dueInvoices }}</div>
           </div>
         </a>
+        <ng-template #dueStatic>
+          <div class="card kpi-card text-center text-muted bg-light d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title text-secondary">Due Invoices</h6>
+              <div class="h4">{{ metrics.dueInvoices }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
       <div class="col-md-3 col-sm-6 mb-3">
-        <a href="#" class="card kpi-card text-center bg-light bg-hover-clickable d-block text-decoration-none"
+        <a
+          *ngIf="metrics.overdueInvoices > 0; else overdueStatic"
+          href="#"
+          class="card kpi-card material-red text-center mat-elevation-z4 bg-hover-clickable d-block text-decoration-none"
           [routerLink]="['/invoices']" [queryParams]="{ status: 'OVERDUE' }" style="cursor:pointer;" tabIndex="0">
           <div class="card-body">
             <h6 class="card-title text-secondary">Overdue</h6>
             <div class="h4 text-danger">{{ metrics.overdueInvoices }}</div>
           </div>
         </a>
+        <ng-template #overdueStatic>
+          <div class="card kpi-card text-center text-muted bg-light d-block" style="cursor:default;">
+            <div class="card-body">
+              <h6 class="card-title text-secondary">Overdue</h6>
+              <div class="h4 text-danger">{{ metrics.overdueInvoices }}</div>
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
 
@@ -102,9 +190,11 @@
         <div class="card">
           <div class="card-header">Tenants by Status</div>
           <div class="card-body">
-            <ngx-charts-pie-chart [results]="tenantsByStatus" [legend]="true" [doughnut]="true" [labels]="true"
-              [scheme]="'vivid'">
-            </ngx-charts-pie-chart>
+            <div style="min-width:0;overflow-x:auto;">
+              <ngx-charts-pie-chart [results]="tenantsByStatus" [legend]="true" [doughnut]="true" [labels]="true"
+                [scheme]="'vivid'">
+              </ngx-charts-pie-chart>
+            </div>
           </div>
         </div>
       </div>
