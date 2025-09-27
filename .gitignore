@@ -1,0 +1,27 @@
+# Node and frontend artifacts
+node_modules/
+dist/
+build/
+.env
+.DS_Store
+
+# Java backend artifacts
+pgms-backend/target/
+pgms-backend/.classpath
+pgms-backend/.project
+pgms-backend/.settings/
+pgms-backend/pgmsdb.mv.db
+pgms-backend/pgmsdb.trace.db
+
+# VSCode and IDE
+.vscode/
+.idea/
+
+# Exclude memory bank project documentation from git
+memory-bank/
+
+# System files
+*.iml
+*.log
+*.swp
+*~

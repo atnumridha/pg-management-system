@@ -41,11 +41,6 @@ npm start
 
 --- 
 
-## Memory Bank and Design System
-
-- All workflows, tech decisions, and UX conventions are recorded in `/memory-bank/`.
-- Material design: Dashboard, chart, and nav styles follow Material palette, shadow/elevation, dark accent where appropriate, ripple effects on action.
-
 ## MIT License
 
 ```text
