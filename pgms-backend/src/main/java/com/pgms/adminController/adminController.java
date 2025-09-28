@@ -32,7 +32,7 @@ public class adminController {
 	}
 
 	// Login endpoint
-	@PostMapping("/admin/login")
+	@PostMapping({"/admin/login", "/v1/admin/login"})
 	public ResponseEntity<?> login(@RequestBody adminModel credentials) {
 		adminModel found = repo.findAll().stream()
 				.filter(a -> a.getAdminName().equals(credentials.getAdminName()) && a.getAdminPassword().equals(credentials.getAdminPassword()))

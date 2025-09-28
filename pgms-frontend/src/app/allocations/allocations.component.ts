@@ -8,11 +8,18 @@ import { faPlus, faBars, faEdit, faTrash } from '@fortawesome/free-solid-svg-ico
   selector: 'app-allocations',
   template: `
   <div class="container my-4">
-    <div class="d-flex justify-content-between align-items-center">
-      <h2>Allocations (Tenant-Room Assignments)</h2>
-      <button class="btn btn-primary" (click)="openAddAllocation()" aria-label="Add Allocation">
-        <fa-icon [icon]="faPlus"></fa-icon>
-      </button>
+    <div class="row mb-2 align-items-center">
+      <div class="col">
+        <div class="section-header">
+          <span class="icon" aria-hidden="true">🛏️</span>
+          Allocations (Tenant-Room Assignments)
+        </div>
+      </div>
+      <div class="col-auto text-end">
+        <button class="btn btn-primary" (click)="openAddAllocation()" aria-label="Add Allocation">
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
+      </div>
     </div>
     <hr>
     <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>

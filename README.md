@@ -1,6 +1,6 @@
 # Paying Guest Management System
 
-A modern, material-inspired management system for PG (Paying Guest) accommodations—streamlining property, room, tenant, allocation, invoice, and payment workflows. Full stack: Angular (frontend), Spring Boot (backend). 
+A modern, material-inspired management system for PG (Paying Guest) accommodations—streamlining property, room, tenant, allocation, invoice, and payment workflows. Full stack: Angular (frontend), Spring Boot (backend).
 
 ## Features
 
@@ -39,11 +39,13 @@ npm start
 - App opens on `http://localhost:4200`
 - **Note:** Use Node 16+ and npm 8+ for best results.
 
---- 
+---
 
 mvn clean package -- package angular with spring boot
 
-java -jar <*.jar> to run then together
+java -jar <\*.jar> to run then together
+
+run ng serve --proxy-config proxy.conf.json
 
 ## MIT License
 
@@ -72,4 +74,3 @@ SOFTWARE.
 ```
 
 ---
-

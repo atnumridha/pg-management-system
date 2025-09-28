@@ -1,6 +1,9 @@
 <div class="container my-4">
-  <h2>Properties Management</h2>
-  <hr>
+<div class="section-header">
+  <span class="icon" aria-hidden="true">🏢</span>
+  Properties Management
+</div>
+<hr>
   <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
   <div *ngIf="error" class="alert alert-danger">{{ error }}</div>
   <div class="row mb-2">

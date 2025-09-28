@@ -8,11 +8,18 @@ import { faPlus, faEdit, faTrash, faBars } from '@fortawesome/free-solid-svg-ico
   selector: 'app-payments',
   template: `
   <div class="container my-4">
-    <div class="d-flex justify-content-between align-items-center">
-      <h2>Payments</h2>
-      <button class="btn btn-primary" (click)="openAddPayment()" aria-label="Add Payment">
-        <fa-icon [icon]="faPlus"></fa-icon>
-      </button>
+    <div class="row mb-2 align-items-center">
+      <div class="col">
+        <div class="section-header">
+          <span class="icon" aria-hidden="true">💳</span>
+          Payments
+        </div>
+      </div>
+      <div class="col-auto text-end">
+        <button class="btn btn-primary" (click)="openAddPayment()" aria-label="Add Payment">
+          <fa-icon [icon]="faPlus"></fa-icon>
+        </button>
+      </div>
     </div>
     <hr>
     <div *ngIf="loading" class="my-4 text-center"><div class="spinner-border"></div> Loading...</div>
