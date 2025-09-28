@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -19,7 +20,7 @@ export class AdminLoginComponent {
     this.loading = true;
     this.errorMessage = '';
     this.http
-      .post<any>('http://localhost:8080/api/v1/admin/login', {
+      .post<any>(`${environment.apiBase}/v1/admin/login`, {
         adminName: this.username,
         adminPassword: this.password,
       })

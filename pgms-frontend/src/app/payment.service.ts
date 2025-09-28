@@ -13,11 +13,13 @@ export interface Payment {
   notes?: string;
 }
 
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentService {
-  private baseUrl = 'http://localhost:8080/api/v1/payments';
+  private baseUrl = `${environment.apiBase}/v1/payments`;
 
   constructor(private http: HttpClient) {}
 

@@ -14,11 +14,13 @@ export interface MetricsSummary {
   overdueInvoices: number;
 }
 
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class MetricsService {
-  private baseUrl = 'http://localhost:8080/api/v1/metrics';
+  private baseUrl = `${environment.apiBase}/v1/metrics`;
 
   constructor(private http: HttpClient) {}
 

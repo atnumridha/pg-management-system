@@ -20,11 +20,13 @@ export interface Invoice {
   pdfUrl?: string;
 }
 
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class InvoiceService {
-  private baseUrl = 'http://localhost:8080/api/v1/invoices';
+  private baseUrl = `${environment.apiBase}/v1/invoices`;
 
   constructor(private http: HttpClient) {}
 

@@ -41,6 +41,10 @@ npm start
 
 --- 
 
+mvn clean package -- package angular with spring boot
+
+java -jar <*.jar> to run then together
+
 ## MIT License
 
 ```text
@@ -68,3 +72,4 @@ SOFTWARE.
 ```
 
 ---
+

@@ -15,11 +15,13 @@ export interface Property {
   active: boolean;
 }
 
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class PropertyService {
-  private baseUrl = 'http://localhost:8080/api/v1/properties';
+  private baseUrl = `${environment.apiBase}/v1/properties`;
 
   constructor(private http: HttpClient) {}
 

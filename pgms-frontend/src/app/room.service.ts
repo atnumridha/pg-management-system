@@ -13,11 +13,13 @@ export interface Room {
   status: string;
 }
 
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class RoomService {
-  private baseUrl = 'http://localhost:8080/api/v1/rooms';
+  private baseUrl = `${environment.apiBase}/v1/rooms`;
 
   constructor(private http: HttpClient) {}
 

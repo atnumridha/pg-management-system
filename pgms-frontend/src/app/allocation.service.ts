@@ -15,11 +15,13 @@ export interface Allocation {
   notes?: string;
 }
 
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AllocationService {
-  private baseUrl = 'http://localhost:8080/api/v1/allocations';
+  private baseUrl = `${environment.apiBase}/v1/allocations`;
 
   constructor(private http: HttpClient) {}
 

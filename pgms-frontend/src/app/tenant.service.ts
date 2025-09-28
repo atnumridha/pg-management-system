@@ -3,11 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Tenant } from './tenant';
 
+import { environment } from '../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class TenantService {
-  private baseUrl = 'http://localhost:8080/api/v1/tenants';
+  private baseUrl = `${environment.apiBase}/v1/tenants`;
 
   constructor(private http: HttpClient) {}
 
